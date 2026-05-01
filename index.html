@@ -488,34 +488,6 @@ section { position: relative; z-index: 2; }
   line-height: 1.6;
 }
 
-/* ── Scrolling marquee ticker ─────────────────────────────── */
-/* Infinite left-scrolling text strip at the bottom of the hero */
-/* EDIT: change the <span> text in the marquee HTML to update ticker items */
-/* NOTE: duplicate the text twice so it loops seamlessly */
-.hero-marquee {
-  margin-top: 80px;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  padding: 14px 0;
-  overflow: hidden;
-  white-space: nowrap;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 12px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-}
-.hero-marquee .track {
-  display: inline-block;
-  /* EDIT: change duration to speed up (lower) or slow down (higher) */
-  animation: marquee-scroll 40s linear infinite;
-}
-.hero-marquee .track span  { margin: 0 30px; color: var(--ink-2); }
-.hero-marquee .track .mdot { color: var(--pink); margin: 0 4px; } /* pink bullet separator */
-@keyframes marquee-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); } /* -50% because content is doubled for seamless loop */
-}
 
 /* ════════════════════════════════════════════════════════════
    EVENTS / CARDS SECTION
@@ -1178,28 +1150,6 @@ footer {
       <div class="sub" contenteditable="true" data-persist="hero-sub">Lorem ipsum dolor sit amet, consectetur adipiscing elit. We document indie culture and the sounds that define the underground — issue by issue, night by night.</div>
     </div>
 
-    <!-- ── Scrolling marquee ticker ───────────────────────── -->
-    <!--
-      EDIT: Update the <span> text items below.
-      IMPORTANT: Keep content doubled (appears twice) for seamless loop.
-      Pattern: <span>Item text</span><span class="mdot">●</span>
-      Add a new item by adding another <span>…</span><span class="mdot">●</span>
-      pair to BOTH the first half AND the second half of the track.
-    -->
-    <div class="hero-marquee" aria-hidden="true">
-      <div class="track" id="marquee-track">
-        <!-- First copy -->
-        <span>Issue 04 out now</span><span class="mdot">●</span>
-        <span>Field reports from Brooklyn</span><span class="mdot">●</span>
-        <span>Tickets · Mercurium · Apr 14</span><span class="mdot">●</span>
-        <span>Submissions open</span><span class="mdot">●</span>
-        <!-- Second copy (duplicate) — required for seamless infinite scroll -->
-        <span>Issue 04 out now</span><span class="mdot">●</span>
-        <span>Field reports from Brooklyn</span><span class="mdot">●</span>
-        <span>Tickets · Mercurium · Apr 14</span><span class="mdot">●</span>
-        <span>Submissions open</span><span class="mdot">●</span>
-      </div>
-    </div>
 
   </div><!-- /wrap -->
 </section><!-- /hero -->
