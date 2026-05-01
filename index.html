@@ -1,51 +1,72 @@
 <!doctype html>
 <html lang="en" data-theme="dark">
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  LOREM ENT. — Editorial Zine Website                        ║
+  ║  Single-file: all CSS in <style>, all JS in <script>        ║
+  ║                                                              ║
+  ║  HOW TO EDIT THIS FILE                                       ║
+  ║  ─────────────────────────────────────────────────────────  ║
+  ║  • Open in any text editor (VS Code, Notepad++, etc.)       ║
+  ║  • Each section is marked with a large comment banner       ║
+  ║  • Every editable value has a comment right above it        ║
+  ║  • Search for "EDIT:" to jump to all customisable spots     ║
+  ║  • Photos: replace <div class="photo-slot"> with an         ║
+  ║    <img> tag — see the "HOW TO ADD A PHOTO" comments        ║
+  ║  • Colors/fonts live in the :root block near the top of     ║
+  ║    the <style> section                                       ║
+  ║  • Emails live in the INQUIRIES section (search "EDIT:")    ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<!-- EDIT: page title shown in browser tab -->
 <title>Lorem Entertainment — Editorial Zine</title>
+
+<!-- Google Fonts — Fraunces (editorial serif) + JetBrains Mono (labels) + Inter (body) -->
+<!-- EDIT: swap font names here if you want different typefaces -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
 <style>
-  /* ── Theme tokens ─────────────────────────────────────── */
+/* ════════════════════════════════════════════════════════════
+   DESIGN TOKENS — edit these to retheme the whole site
+   ════════════════════════════════════════════════════════════ */
+:root {
+  /* EDIT: dark-mode background colors */
+  --bg:        #0a0a0a;   /* main page background           */
+  --bg-2:      #0f0d10;   /* footer background              */
+  --wine:      #1a0d14;   /* feature-section background     */
+
+  /* EDIT: dark-mode text colors */
+  --ink:       #f4f2ef;   /* primary text                   */
+  --ink-2:     #a8a4a0;   /* secondary / body text          */
+  --ink-3:     #6f6b68;   /* muted / meta text              */
+
+  /* EDIT: border and divider colors */
+  --line:      rgba(255,255,255,0.08);  /* subtle borders   */
+  --line-2:    rgba(255,255,255,0.14);  /* slightly brighter*/
+
+  /* EDIT: accent color — change both to shift the brand hue */
+  --pink:      #ff3d8b;
+  --pink-2:    #ff6aa3;
+  --pink-soft: rgba(255,61,139,0.12);   /* tinted fill      */
+
+  /* EDIT: tape strip color on polaroids */
+  --tape:      rgba(255,238,180,0.55);
+
+  /* Internal utility tokens (no need to change these) */
+  --shadow:    rgba(0,0,0,0.7);
+  --card-bg:   #121012;
+}
+
+/* ── Light-mode overrides (auto-detected from OS setting) ── */
+/* EDIT: light-mode colors if you want a different light palette */
+@media (prefers-color-scheme: light) {
   :root {
-    --bg:        #0a0a0a;
-    --bg-2:      #0f0d10;
-    --wine:      #1a0d14;
-    --ink:       #f4f2ef;
-    --ink-2:     #a8a4a0;
-    --ink-3:     #6f6b68;
-    --line:      rgba(255,255,255,0.08);
-    --line-2:    rgba(255,255,255,0.14);
-    --pink:      #ff3d8b;
-    --pink-2:    #ff6aa3;
-    --pink-soft: rgba(255,61,139,0.12);
-    --tape:      rgba(255,238,180,0.55);
-    --shadow:    rgba(0,0,0,0.7);
-    --card-bg:   #121012;
-  }
-
-  /* Light mode overrides */
-  @media (prefers-color-scheme: light) {
-    :root {
-      --bg:        #f5f0eb;
-      --bg-2:      #ede8e2;
-      --wine:      #f0e8ea;
-      --ink:       #0a0a0a;
-      --ink-2:     #4a4643;
-      --ink-3:     #8a8683;
-      --line:      rgba(0,0,0,0.08);
-      --line-2:    rgba(0,0,0,0.14);
-      --pink-soft: rgba(255,61,139,0.10);
-      --tape:      rgba(200,180,100,0.45);
-      --shadow:    rgba(0,0,0,0.25);
-      --card-bg:   #ede8e2;
-    }
-  }
-
-  /* Respect forced theme override */
-  [data-theme="light"] {
     --bg:        #f5f0eb;
     --bg-2:      #ede8e2;
     --wine:      #f0e8ea;
@@ -59,1054 +80,1641 @@
     --shadow:    rgba(0,0,0,0.25);
     --card-bg:   #ede8e2;
   }
-  [data-theme="dark"] {
-    --bg:        #0a0a0a;
-    --bg-2:      #0f0d10;
-    --wine:      #1a0d14;
-    --ink:       #f4f2ef;
-    --ink-2:     #a8a4a0;
-    --ink-3:     #6f6b68;
-    --line:      rgba(255,255,255,0.08);
-    --line-2:    rgba(255,255,255,0.14);
-    --pink-soft: rgba(255,61,139,0.12);
-    --tape:      rgba(255,238,180,0.55);
-    --shadow:    rgba(0,0,0,0.7);
-    --card-bg:   #121012;
-  }
+}
 
-  /* ── Reset & base ──────────────────────────────────────── */
-  *, *::before, *::after { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: Inter, system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-    transition: background 0.4s ease, color 0.4s ease;
-  }
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    background:
-      radial-gradient(1200px 600px at 80% -100px, rgba(255,61,139,0.06), transparent 60%),
-      radial-gradient(900px 500px at -10% 20%, rgba(255,61,139,0.04), transparent 60%);
-  }
+/* Manual theme override via data-theme attribute (set by theme toggle button) */
+[data-theme="light"] {
+  --bg:        #f5f0eb;
+  --bg-2:      #ede8e2;
+  --wine:      #f0e8ea;
+  --ink:       #0a0a0a;
+  --ink-2:     #4a4643;
+  --ink-3:     #8a8683;
+  --line:      rgba(0,0,0,0.08);
+  --line-2:    rgba(0,0,0,0.14);
+  --pink-soft: rgba(255,61,139,0.10);
+  --tape:      rgba(200,180,100,0.45);
+  --shadow:    rgba(0,0,0,0.25);
+  --card-bg:   #ede8e2;
+}
+[data-theme="dark"] {
+  --bg:        #0a0a0a;
+  --bg-2:      #0f0d10;
+  --wine:      #1a0d14;
+  --ink:       #f4f2ef;
+  --ink-2:     #a8a4a0;
+  --ink-3:     #6f6b68;
+  --line:      rgba(255,255,255,0.08);
+  --line-2:    rgba(255,255,255,0.14);
+  --pink-soft: rgba(255,61,139,0.12);
+  --tape:      rgba(255,238,180,0.55);
+  --shadow:    rgba(0,0,0,0.7);
+  --card-bg:   #121012;
+}
 
-  /* ── Film grain ────────────────────────────────────────── */
-  .grain {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    opacity: .5;
-    mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.35 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-  }
+/* ════════════════════════════════════════════════════════════
+   RESET & BASE STYLES
+   ════════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+/* Ambient pink glow in background — adjust opacity values to intensify/soften */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(1200px 600px at 80% -100px, rgba(255,61,139,0.06), transparent 60%),
+    radial-gradient(900px 500px at -10% 20%, rgba(255,61,139,0.04), transparent 60%);
+}
 
-  /* ── Nav ───────────────────────────────────────────────── */
-  .nav {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    padding: 18px 40px;
-    background: rgba(10,10,10,0.7);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--line);
-    transition: background 0.4s ease, border-color 0.4s ease;
-  }
-  [data-theme="light"] .nav {
-    background: rgba(245,240,235,0.8);
-  }
-  @media (prefers-color-scheme: light) {
-    .nav { background: rgba(245,240,235,0.8); }
-  }
-  .brand {
-    font-family: "JetBrains Mono", monospace;
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 0.18em;
-    color: var(--ink);
-    display: flex;
-    align-items: center;
-    gap: 0;
-  }
-  .brand .dot {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--pink);
-    margin-right: 10px;
-    box-shadow: 0 0 12px var(--pink);
-    flex-shrink: 0;
-  }
-  .nav-links {
-    display: flex;
-    gap: 36px;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 12px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-  }
-  .nav-links a {
-    color: var(--ink-2);
-    text-decoration: none;
-    position: relative;
-    padding: 6px 0;
-    transition: color 0.2s ease;
-  }
-  .nav-links a.active { color: var(--ink); }
-  .nav-links a.active::after {
-    content: "";
-    position: absolute;
-    left: 0; right: 0; bottom: -2px;
-    height: 1px;
-    background: var(--pink);
-  }
-  .nav-links a:not(.active):hover { color: var(--ink); }
-  .nav-right {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 14px;
-  }
+/* ── Film grain overlay — fixed over entire page ──────────── */
+/* EDIT: change opacity to make grain stronger (0.8) or remove entirely (0) */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: .5;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.35 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
 
-  /* Theme toggle button */
-  .theme-btn {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: 1px solid var(--line-2);
-    background: transparent;
-    color: var(--ink-2);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    transition: border-color 0.2s, color 0.2s, background 0.2s;
-  }
-  .theme-btn:hover { border-color: var(--pink); color: var(--pink); }
+/* ════════════════════════════════════════════════════════════
+   NAVIGATION BAR
+   ════════════════════════════════════════════════════════════ */
+/* Sticky frosted-glass nav bar */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* brand | center links | right buttons */
+  align-items: center;
+  padding: 18px 40px;
+  background: rgba(10,10,10,0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+[data-theme="light"] .nav,
+[data-theme="light"] .nav { background: rgba(245,240,235,0.8); }
+@media (prefers-color-scheme: light) {
+  .nav { background: rgba(245,240,235,0.8); }
+}
 
-  /* ── Pill button ───────────────────────────────────────── */
-  .pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 9px 18px;
-    border-radius: 999px;
-    background: var(--pink);
-    color: #0a0a0a;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    font-weight: 700;
-    text-transform: uppercase;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 8px 30px -10px rgba(255,61,139,0.7);
-    transition: transform .15s ease, box-shadow .15s ease;
-  }
-  .pill:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 12px 40px -8px rgba(255,61,139,0.8);
-  }
-  .pill.ghost {
-    background: transparent;
-    color: var(--ink);
-    box-shadow: inset 0 0 0 1px var(--line-2);
-  }
-  .pill.ghost:hover { box-shadow: inset 0 0 0 1px var(--pink); color: var(--pink); }
+/* Brand name with glowing pink dot */
+.brand {
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+}
+.brand .dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--pink);
+  margin-right: 10px;
+  box-shadow: 0 0 12px var(--pink);
+  flex-shrink: 0;
+}
 
-  /* ── Layout helpers ────────────────────────────────────── */
-  section { position: relative; z-index: 2; }
-  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 40px; }
-  .eyebrow {
-    display: inline-block;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    padding: 5px 10px;
-    border: 1px solid var(--pink);
-    color: var(--pink);
-    background: var(--pink-soft);
-  }
-  .section-head {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin: 24px 0 36px;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  .section-title {
-    font-family: Fraunces, serif;
-    font-weight: 500;
-    font-size: 42px;
-    letter-spacing: -0.01em;
-    margin: 14px 0 0;
-    color: var(--ink);
-  }
-  .see-all {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--ink-2);
-    text-decoration: none;
-    border-bottom: 1px solid var(--line-2);
-    padding-bottom: 4px;
-    transition: color 0.2s, border-color 0.2s;
-  }
-  .see-all:hover { color: var(--pink); border-color: var(--pink); }
+/* Center navigation links */
+/* EDIT: add or remove <a> tags in the HTML to change nav items */
+.nav-links {
+  display: flex;
+  gap: 36px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.nav-links a {
+  color: var(--ink-2);
+  text-decoration: none;
+  position: relative;
+  padding: 6px 0;
+  transition: color 0.2s ease;
+}
+.nav-links a.active { color: var(--ink); }
+/* Pink underline on the active nav link */
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 1px;
+  background: var(--pink);
+}
+.nav-links a:not(.active):hover { color: var(--ink); }
 
-  /* ── Hero ──────────────────────────────────────────────── */
-  .hero {
-    position: relative;
-    min-height: 720px;
-    padding: 80px 0 100px;
-    overflow: hidden;
-  }
-  .hero-grid-bg {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-    background-size: 80px 80px;
-    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
-    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
-    pointer-events: none;
-  }
-  [data-theme="light"] .hero-grid-bg {
-    background-image:
-      linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
-  }
-  .corner-tag {
-    position: absolute;
-    left: 60px;
-    top: 80px;
-    width: 120px;
-    height: 120px;
-    border: 1px dashed var(--pink);
-    transform: rotate(-8deg);
-    opacity: .7;
-  }
-  .corner-tag::before {
-    content: "VOL.04 / 2026";
-    position: absolute;
-    left: 0;
-    top: -22px;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: var(--pink);
-    white-space: nowrap;
-  }
+/* Right side: theme toggle + subscribe button */
+.nav-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 14px;
+}
 
-  /* Polaroid cluster */
-  .hero-stage {
-    position: relative;
-    height: 380px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-    perspective: 800px;
-  }
-  .polaroid {
-    position: absolute;
-    background: #f4f2ef;
-    padding: 14px 14px 52px;
-    box-shadow: 0 30px 60px -20px var(--shadow), 0 6px 20px -6px var(--shadow);
-    cursor: grab;
-    user-select: none;
-    will-change: transform;
-    transition: box-shadow 0.3s ease;
-  }
-  .polaroid:active { cursor: grabbing; }
-  .polaroid:hover { box-shadow: 0 40px 80px -20px var(--shadow), 0 8px 30px -6px var(--shadow); }
-  .polaroid .photo {
-    width: 240px;
-    height: 240px;
-    background: #111;
-    display: block;
-    position: relative;
-    overflow: hidden;
-  }
-  .polaroid .caption {
-    position: absolute;
-    left: 0; right: 0; bottom: 14px;
-    text-align: center;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    color: #0a0a0a;
-    text-transform: uppercase;
-  }
-  .polaroid .tape {
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%) rotate(-3deg);
-    width: 74px;
-    height: 22px;
-    background: var(--tape);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-    border-left: 1px dashed rgba(0,0,0,0.15);
-    border-right: 1px dashed rgba(0,0,0,0.15);
-  }
-  .pol-1 { transform: rotate(-9deg) translate(-180px, 0); }
-  .pol-2 { transform: rotate(2deg) translate(0, -12px); z-index: 2; }
-  .pol-3 { transform: rotate(8deg) translate(180px, 8px); }
+/* Dark/light mode toggle button (circle icon) */
+.theme-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--line-2);
+  background: transparent;
+  color: var(--ink-2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.theme-btn:hover { border-color: var(--pink); color: var(--pink); }
 
-  /* Hero caption */
-  .hero-caption {
-    margin-top: 60px;
-    text-align: center;
-    max-width: 560px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .hero-caption .label {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 11px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--pink);
-  }
-  .hero-caption .title {
-    font-family: Fraunces, serif;
-    font-weight: 700;
-    font-size: 30px;
-    margin: 8px 0 14px;
-    font-style: italic;
-    color: var(--ink);
-  }
-  .hero-caption .sub {
-    color: var(--ink-2);
-    font-size: 14.5px;
-    line-height: 1.6;
-  }
+/* ════════════════════════════════════════════════════════════
+   REUSABLE COMPONENTS
+   ════════════════════════════════════════════════════════════ */
 
-  /* Marquee */
-  .hero-marquee {
-    margin-top: 80px;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    padding: 14px 0;
-    overflow: hidden;
-    white-space: nowrap;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 12px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-  }
-  .hero-marquee .track {
-    display: inline-block;
-    animation: marquee-scroll 40s linear infinite;
-  }
-  .hero-marquee .track span { margin: 0 30px; color: var(--ink-2); }
-  .hero-marquee .track .mdot { color: var(--pink); margin: 0 4px; }
-  @keyframes marquee-scroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
+/* ── Pill / CTA button ────────────────────────────────────── */
+/* Used for Subscribe, Reserve a copy, etc. */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  background: var(--pink);
+  color: #0a0a0a;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 8px 30px -10px rgba(255,61,139,0.7);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 12px 40px -8px rgba(255,61,139,0.8);
+}
+/* Ghost variant — outlined pill with no fill */
+.pill.ghost {
+  background: transparent;
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--line-2);
+}
+.pill.ghost:hover { box-shadow: inset 0 0 0 1px var(--pink); color: var(--pink); }
 
-  /* ── Events ────────────────────────────────────────────── */
-  .events { padding: 90px 0 80px; }
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-  .card {
-    background: var(--card-bg);
-    border: 1px solid var(--line);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
-  }
-  .card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255,61,139,0.3);
-    box-shadow: 0 20px 50px -20px rgba(255,61,139,0.15);
-  }
-  .card .img {
-    aspect-ratio: 4 / 5;
-    position: relative;
-    background: #0c0a0c;
-    overflow: hidden;
-  }
-  [data-theme="light"] .card .img { background: #ddd8d2; }
-  .card .img .badge {
-    position: absolute;
-    top: 14px; left: 14px;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--ink);
-    background: rgba(0,0,0,0.5);
-    backdrop-filter: blur(6px);
-    padding: 5px 9px;
-    border: 1px solid var(--line-2);
-    z-index: 1;
-  }
-  .card .meta { padding: 22px 22px 26px; display: flex; flex-direction: column; gap: 10px; }
-  .card h3 {
-    font-family: Fraunces, serif;
-    font-weight: 700;
-    font-size: 21px;
-    letter-spacing: 0.01em;
-    text-transform: uppercase;
-    margin: 0;
-    color: var(--ink);
-  }
-  .card p { margin: 0; color: var(--ink-2); font-size: 13.5px; line-height: 1.55; }
-  .card .more {
-    margin-top: 8px;
-    color: var(--pink);
-    font-family: "JetBrains Mono", monospace;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    text-decoration: none;
-  }
-  .card .more::after { content: " →"; transition: margin .2s ease; }
-  .card:hover .more::after { margin-left: 6px; }
+/* ── Section layout helpers ───────────────────────────────── */
+section { position: relative; z-index: 2; }
 
-  /* ── Feature / print issue ─────────────────────────────── */
-  .feature {
-    margin: 60px 0 0;
-    background: linear-gradient(180deg, var(--wine) 0%, #150812 100%);
-    border-top: 1px solid rgba(255,61,139,0.15);
-    border-bottom: 1px solid rgba(255,61,139,0.1);
-    padding: 110px 0;
-    position: relative;
-    overflow: hidden;
-    transition: background 0.4s ease;
-  }
-  [data-theme="light"] .feature {
-    background: linear-gradient(180deg, #f0e8ea 0%, #e8e0e8 100%);
-  }
-  .feature::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(255,61,139,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,61,139,0.04) 1px, transparent 1px);
-    background-size: 120px 120px;
-    mask-image: radial-gradient(ellipse at 70% 50%, black 20%, transparent 70%);
-    -webkit-mask-image: radial-gradient(ellipse at 70% 50%, black 20%, transparent 70%);
-  }
-  .feature-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-    position: relative;
-  }
-  .pol-feature {
-    position: relative;
-    width: 380px;
-    height: 480px;
-    justify-self: center;
-  }
-  .pol-feature .pink-shadow {
-    position: absolute;
-    inset: 14px -14px -14px 14px;
-    background: var(--pink);
-    z-index: 0;
-  }
-  .pol-feature .frame {
-    position: relative;
-    background: #f4f2ef;
-    padding: 18px 18px 70px;
-    z-index: 1;
-    box-shadow: 0 30px 80px -20px rgba(0,0,0,0.8);
-  }
-  .pol-feature .photo {
-    width: 100%;
-    aspect-ratio: 3 / 4;
-    background: #111;
-    position: relative;
-    overflow: hidden;
-  }
-  .pol-feature .stamp {
-    position: absolute;
-    left: 18px; bottom: 34px;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 10px;
-    color: #0a0a0a;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
-  .pol-feature .price {
-    position: absolute;
-    right: 18px; bottom: 34px;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 10px;
-    color: #0a0a0a;
-    letter-spacing: 0.18em;
-  }
-  .pol-feature .issue-no {
-    position: absolute;
-    right: 30px; bottom: 90px;
-    color: #fff;
-    font-family: Fraunces, serif;
-    font-weight: 900;
-    font-size: 64px;
-    line-height: 1;
-    letter-spacing: -0.04em;
-    mix-blend-mode: difference;
-    pointer-events: none;
-  }
-  .pol-feature .tape {
-    position: absolute;
-    top: -16px; left: 30px;
-    width: 90px; height: 26px;
-    background: var(--tape);
-    transform: rotate(-6deg);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-  }
-  .feature-copy .label {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 11px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: var(--pink);
-  }
-  .feature-copy h2 {
-    font-family: Fraunces, serif;
-    font-weight: 700;
-    font-style: italic;
-    font-size: 64px;
-    line-height: 1.02;
-    letter-spacing: -0.02em;
-    margin: 18px 0 22px;
-    color: var(--ink);
-  }
-  .feature-copy h2 em { font-style: normal; display: block; color: var(--ink); }
-  .feature-copy p { color: var(--ink-2); font-size: 15px; line-height: 1.7; max-width: 440px; margin: 0 0 30px; }
-  .feature-copy .row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
-  .specs {
-    display: flex;
-    gap: 28px;
-    margin-top: 36px;
-    padding-top: 24px;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    font-family: "JetBrains Mono", monospace;
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-  }
-  [data-theme="light"] .specs { border-top-color: rgba(0,0,0,0.1); }
-  .specs div strong { display: block; color: var(--ink); font-weight: 500; margin-bottom: 4px; }
+/* EDIT: change max-width here to widen/narrow the content column */
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 40px; }
 
-  /* ── Submit ─────────────────────────────────────────────── */
-  .submit { padding: 100px 0 80px; text-align: center; }
-  .submit h3 { font-family: Fraunces, serif; font-weight: 500; font-size: 34px; margin: 0 0 8px; color: var(--ink); }
-  .submit p { color: var(--ink-2); font-size: 14px; max-width: 520px; margin: 0 auto 32px; line-height: 1.6; }
-  .chips { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-  .chip {
-    padding: 11px 18px;
-    border: 1px solid var(--line-2);
-    background: transparent;
-    color: var(--ink-2);
-    font-family: "JetBrains Mono", monospace;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all .2s ease;
-  }
-  .chip.active, .chip:hover { background: var(--pink); color: #0a0a0a; border-color: var(--pink); }
-  .submit-link {
-    display: inline-block;
-    margin-top: 28px;
-    color: var(--pink);
-    font-family: "JetBrains Mono", monospace;
-    font-size: 11px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-bottom: 1px solid var(--pink);
-    padding-bottom: 4px;
-    transition: opacity 0.2s;
-  }
-  .submit-link:hover { opacity: 0.75; }
+/* Small pink tag above section headings (e.g. "Dispatches") */
+.eyebrow {
+  display: inline-block;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border: 1px solid var(--pink);
+  color: var(--pink);
+  background: var(--pink-soft);
+}
 
-  /* ── Footer ─────────────────────────────────────────────── */
-  footer {
-    border-top: 1px solid var(--line);
-    padding: 34px 0 30px;
-    background: var(--bg-2);
-    transition: background 0.4s ease;
-  }
-  .footer-grid { display: grid; grid-template-columns: 1fr auto auto; gap: 40px; align-items: center; }
-  .footer-links {
-    display: flex;
-    gap: 36px;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-2);
-  }
-  .footer-links a { color: inherit; text-decoration: none; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--pink); }
-  .footer-meta {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    color: var(--ink-3);
-    text-transform: uppercase;
-  }
+/* Section heading row — title on left, "View all" link on right */
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin: 24px 0 36px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.section-title {
+  font-family: Fraunces, serif;
+  font-weight: 500;
+  font-size: 42px;
+  letter-spacing: -0.01em;
+  margin: 14px 0 0;
+  color: var(--ink);
+}
 
-  /* ── Photo slots ─────────────────────────────────────────── */
-  .photo-slot {
-    position: absolute;
-    inset: 0;
-    cursor: pointer;
-    background-image:
-      repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0 8px, rgba(255,255,255,0.08) 8px 16px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #888;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 9.5px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    text-align: center;
-    padding: 10px;
-    transition: filter .2s ease, outline .15s ease;
-  }
-  [data-theme="light"] .photo-slot {
-    background-image:
-      repeating-linear-gradient(45deg, rgba(0,0,0,0.05) 0 8px, rgba(0,0,0,0.10) 8px 16px);
-    color: #aaa;
-  }
-  .photo-slot.has-image { background-image: none; }
-  .photo-slot.has-image .ph-label { display: none; }
-  .photo-slot:hover { filter: brightness(1.15); }
-  .photo-slot:hover .ph-label { color: var(--pink); }
-  .photo-slot.drag-over { outline: 2px dashed var(--pink); }
-  .photo-slot input[type="file"] { display: none; }
+/* Understated "View all →" style link */
+.see-all {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line-2);
+  padding-bottom: 4px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.see-all:hover { color: var(--pink); border-color: var(--pink); }
 
-  /* ── Contenteditable ─────────────────────────────────────── */
-  [contenteditable="true"] { outline: none; }
-  [contenteditable="true"]:hover { box-shadow: inset 0 0 0 1px rgba(255,61,139,0.4); }
-  [contenteditable="true"]:focus { box-shadow: inset 0 0 0 1px var(--pink); background: rgba(255,61,139,0.04); }
+/* ════════════════════════════════════════════════════════════
+   HERO SECTION
+   ════════════════════════════════════════════════════════════ */
+.hero {
+  position: relative;
+  min-height: 720px;
+  padding: 80px 0 100px;
+  overflow: hidden;
+}
 
-  /* ── Scroll reveal animations ───────────────────────────── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .reveal.revealed {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
+/* Faint grid lines across the hero background */
+.hero-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 80px 80px; /* EDIT: grid cell size */
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  pointer-events: none;
+}
+[data-theme="light"] .hero-grid-bg {
+  background-image:
+    linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+}
 
-  /* ── Reduced motion overrides ───────────────────────────── */
-  @media (prefers-reduced-motion: reduce) {
-    .hero-marquee .track { animation: none; }
-    .card:hover { transform: none; }
-    .reveal { opacity: 1; transform: none; transition: none; }
-    .polaroid { transition: none; }
-  }
+/* Dashed decorative square in top-left corner */
+/* EDIT: change the ::before content to update the "VOL.04 / 2026" label */
+.corner-tag {
+  position: absolute;
+  left: 60px;
+  top: 80px;
+  width: 120px;
+  height: 120px;
+  border: 1px dashed var(--pink);
+  transform: rotate(-8deg);
+  opacity: .7;
+}
+.corner-tag::before {
+  /* EDIT: issue label shown above the dashed box */
+  content: "VOL.04 / 2026";
+  position: absolute;
+  left: 0;
+  top: -22px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--pink);
+  white-space: nowrap;
+}
 
-  /* ── Responsive ─────────────────────────────────────────── */
-  @media (max-width: 980px) {
-    .nav { grid-template-columns: 1fr auto; padding: 14px 20px; }
-    .nav-links { display: none; }
-    .wrap { padding: 0 20px; }
-    .cards { grid-template-columns: 1fr; gap: 20px; }
-    .feature-grid { grid-template-columns: 1fr; gap: 50px; }
-    .feature-copy h2 { font-size: 46px; }
-    .pol-feature { width: 300px; height: 400px; }
-    .hero-stage { height: auto; flex-direction: column; gap: 20px; padding: 20px 0; }
-    .pol-1, .pol-2, .pol-3 { position: relative; transform: rotate(0); }
-    .pol-1 { transform: rotate(-4deg); }
-    .pol-3 { transform: rotate(3deg); }
-    .corner-tag { display: none; }
-    .footer-grid { grid-template-columns: 1fr; gap: 20px; text-align: center; }
-    .footer-links { justify-content: center; flex-wrap: wrap; gap: 18px; }
-  }
-  @media (max-width: 600px) {
-    .hero { padding: 50px 0 60px; }
-    .section-title { font-size: 30px; }
-    .feature-copy h2 { font-size: 36px; }
-    .submit h3 { font-size: 26px; }
-    .hero-caption .title { font-size: 22px; }
-  }
+/* ── Polaroid cluster ────────────────────────────────────── */
+/* Three polaroids arranged with rotation — parallax on mouse move */
+.hero-stage {
+  position: relative;
+  height: 380px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  perspective: 800px;
+}
+
+/* Base polaroid frame (white card with photo + caption) */
+.polaroid {
+  position: absolute;
+  background: #f4f2ef; /* polaroid paper white — intentionally fixed, not themed */
+  padding: 14px 14px 52px; /* 52px bottom = space for caption */
+  box-shadow: 0 30px 60px -20px var(--shadow), 0 6px 20px -6px var(--shadow);
+  cursor: grab;
+  user-select: none;
+  will-change: transform;
+  transition: box-shadow 0.3s ease;
+}
+.polaroid:active { cursor: grabbing; }
+.polaroid:hover { box-shadow: 0 40px 80px -20px var(--shadow), 0 8px 30px -6px var(--shadow); }
+
+/* Photo area inside each polaroid */
+.polaroid .photo {
+  width: 240px;  /* EDIT: polaroid photo width */
+  height: 240px; /* EDIT: polaroid photo height */
+  background: #111;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Caption text at bottom of each polaroid */
+/* EDIT in HTML: change the text inside <div class="caption"> */
+.polaroid .caption {
+  position: absolute;
+  left: 0; right: 0; bottom: 14px;
+  text-align: center;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: #0a0a0a; /* always dark — it's on white polaroid paper */
+  text-transform: uppercase;
+}
+
+/* Semi-transparent tape strip across the top of each polaroid */
+.polaroid .tape {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 74px;
+  height: 22px;
+  background: var(--tape);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  border-left: 1px dashed rgba(0,0,0,0.15);
+  border-right: 1px dashed rgba(0,0,0,0.15);
+}
+
+/* Individual polaroid positions — EDIT rotation/translation here */
+.pol-1 { transform: rotate(-9deg) translate(-180px, 0); }   /* left, tilted left  */
+.pol-2 { transform: rotate(2deg)  translate(0,    -12px); z-index: 2; } /* center, slightly up */
+.pol-3 { transform: rotate(8deg)  translate(180px,  8px); }  /* right, tilted right */
+
+/* ── Hero caption block (below polaroids) ─────────────────── */
+.hero-caption {
+  margin-top: 60px;
+  text-align: center;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Small pink eyebrow label */
+.hero-caption .label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--pink);
+}
+/* Large italic serif headline */
+.hero-caption .title {
+  font-family: Fraunces, serif;
+  font-weight: 700;
+  font-size: 30px;
+  margin: 8px 0 14px;
+  font-style: italic;
+  color: var(--ink);
+}
+/* Body subtitle */
+.hero-caption .sub {
+  color: var(--ink-2);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+/* ── Scrolling marquee ticker ─────────────────────────────── */
+/* Infinite left-scrolling text strip at the bottom of the hero */
+/* EDIT: change the <span> text in the marquee HTML to update ticker items */
+/* NOTE: duplicate the text twice so it loops seamlessly */
+.hero-marquee {
+  margin-top: 80px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 14px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.hero-marquee .track {
+  display: inline-block;
+  /* EDIT: change duration to speed up (lower) or slow down (higher) */
+  animation: marquee-scroll 40s linear infinite;
+}
+.hero-marquee .track span  { margin: 0 30px; color: var(--ink-2); }
+.hero-marquee .track .mdot { color: var(--pink); margin: 0 4px; } /* pink bullet separator */
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); } /* -50% because content is doubled for seamless loop */
+}
+
+/* ════════════════════════════════════════════════════════════
+   EVENTS / CARDS SECTION
+   ════════════════════════════════════════════════════════════ */
+.events { padding: 90px 0 80px; }
+
+/* 3-column grid — becomes 1-col on mobile */
+/* EDIT: change repeat(3, 1fr) to repeat(2, 1fr) for a 2-col layout */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* Individual event card */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.card:hover {
+  transform: translateY(-4px); /* lifts up on hover */
+  border-color: rgba(255,61,139,0.3);
+  box-shadow: 0 20px 50px -20px rgba(255,61,139,0.15);
+}
+
+/* Card photo area (4:5 portrait ratio) */
+.card .img {
+  aspect-ratio: 4 / 5; /* EDIT: change ratio e.g. 16/9 for landscape */
+  position: relative;
+  background: #0c0a0c;
+  overflow: hidden;
+}
+[data-theme="light"] .card .img { background: #ddd8d2; }
+
+/* Small translucent badge overlaid on top-left of card photo */
+/* EDIT in HTML: change text inside <span class="badge"> */
+.card .img .badge {
+  position: absolute;
+  top: 14px; left: 14px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(6px);
+  padding: 5px 9px;
+  border: 1px solid var(--line-2);
+  z-index: 1;
+}
+
+/* Card text area */
+.card .meta { padding: 22px 22px 26px; display: flex; flex-direction: column; gap: 10px; }
+.card h3 {
+  font-family: Fraunces, serif;
+  font-weight: 700;
+  font-size: 21px;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--ink);
+}
+.card p { margin: 0; color: var(--ink-2); font-size: 13.5px; line-height: 1.55; }
+
+/* Pink "Read X →" link at the bottom of each card */
+.card .more {
+  margin-top: 8px;
+  color: var(--pink);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.card .more::after { content: " →"; transition: margin .2s ease; }
+.card:hover .more::after { margin-left: 6px; } /* arrow nudges right on hover */
+
+/* ════════════════════════════════════════════════════════════
+   FEATURE / PRINT ISSUE SECTION
+   ════════════════════════════════════════════════════════════ */
+.feature {
+  margin: 60px 0 0;
+  /* EDIT: change gradient stops to shift the wine-red tones */
+  background: linear-gradient(180deg, var(--wine) 0%, #150812 100%);
+  border-top: 1px solid rgba(255,61,139,0.15);
+  border-bottom: 1px solid rgba(255,61,139,0.1);
+  padding: 110px 0;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.4s ease;
+}
+[data-theme="light"] .feature {
+  background: linear-gradient(180deg, #f0e8ea 0%, #e8e0e8 100%);
+}
+
+/* Faint pink grid overlay inside the feature section */
+.feature::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,61,139,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,61,139,0.04) 1px, transparent 1px);
+  background-size: 120px 120px;
+  mask-image: radial-gradient(ellipse at 70% 50%, black 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at 70% 50%, black 20%, transparent 70%);
+}
+
+/* Two-col layout: oversized polaroid on left, copy on right */
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+}
+
+/* Oversized feature polaroid with pink offset shadow */
+.pol-feature {
+  position: relative;
+  width: 380px;
+  height: 480px;
+  justify-self: center;
+}
+/* The hot-pink offset shadow behind the polaroid */
+.pol-feature .pink-shadow {
+  position: absolute;
+  inset: 14px -14px -14px 14px; /* offset right and down */
+  background: var(--pink);
+  z-index: 0;
+}
+/* White polaroid card itself */
+.pol-feature .frame {
+  position: relative;
+  background: #f4f2ef;
+  padding: 18px 18px 70px;
+  z-index: 1;
+  box-shadow: 0 30px 80px -20px rgba(0,0,0,0.8);
+}
+/* Photo area inside the feature polaroid */
+.pol-feature .photo {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background: #111;
+  position: relative;
+  overflow: hidden;
+}
+/* Bottom-left stamp text (e.g. issue number/title) */
+/* EDIT in HTML: change the text in <div class="stamp"> */
+.pol-feature .stamp {
+  position: absolute;
+  left: 18px; bottom: 34px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  color: #0a0a0a;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+/* Bottom-right price text */
+/* EDIT in HTML: change the text in <div class="price"> */
+.pol-feature .price {
+  position: absolute;
+  right: 18px; bottom: 34px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  color: #0a0a0a;
+  letter-spacing: 0.18em;
+}
+/* Large issue number watermarked on the photo (mix-blend-mode:difference) */
+/* EDIT in HTML: change the number in <div class="issue-no"> */
+.pol-feature .issue-no {
+  position: absolute;
+  right: 30px; bottom: 90px;
+  color: #fff;
+  font-family: Fraunces, serif;
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  mix-blend-mode: difference; /* invert against whatever image is behind it */
+  pointer-events: none;
+}
+/* Tape strip at top of feature polaroid */
+.pol-feature .tape {
+  position: absolute;
+  top: -16px; left: 30px;
+  width: 90px; height: 26px;
+  background: var(--tape);
+  transform: rotate(-6deg);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
+
+/* Feature copy (right column) */
+.feature-copy .label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--pink);
+}
+/* Large italic headline */
+.feature-copy h2 {
+  font-family: Fraunces, serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 64px;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin: 18px 0 22px;
+  color: var(--ink);
+}
+.feature-copy h2 em { font-style: normal; display: block; color: var(--ink); }
+.feature-copy p { color: var(--ink-2); font-size: 15px; line-height: 1.7; max-width: 440px; margin: 0 0 30px; }
+.feature-copy .row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+
+/* Specs row (page count, dimensions, edition) */
+/* EDIT in HTML: update the <strong> values inside .specs */
+.specs {
+  display: flex;
+  gap: 28px;
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+[data-theme="light"] .specs { border-top-color: rgba(0,0,0,0.1); }
+.specs div strong { display: block; color: var(--ink); font-weight: 500; margin-bottom: 4px; }
+
+/* ════════════════════════════════════════════════════════════
+   SUBMIT / CONTRIBUTIONS SECTION
+   ════════════════════════════════════════════════════════════ */
+.submit { padding: 100px 0 80px; text-align: center; }
+.submit h3 { font-family: Fraunces, serif; font-weight: 500; font-size: 34px; margin: 0 0 8px; color: var(--ink); }
+.submit p  { color: var(--ink-2); font-size: 14px; max-width: 520px; margin: 0 auto 32px; line-height: 1.6; }
+
+/* Filter chips — click to toggle active category */
+/* EDIT in HTML: add/remove <button class="chip"> inside #chips to add/remove categories */
+.chips { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.chip {
+  padding: 11px 18px;
+  border: 1px solid var(--line-2);
+  background: transparent;
+  color: var(--ink-2);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+.chip.active,
+.chip:hover { background: var(--pink); color: #0a0a0a; border-color: var(--pink); }
+
+/* "Contribute to the archive →" link */
+.submit-link {
+  display: inline-block;
+  margin-top: 28px;
+  color: var(--pink);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid var(--pink);
+  padding-bottom: 4px;
+  transition: opacity 0.2s;
+}
+.submit-link:hover { opacity: 0.75; }
+
+/* ════════════════════════════════════════════════════════════
+   INQUIRIES SECTION
+   ════════════════════════════════════════════════════════════ */
+/* Dark wine-toned section with a grid of email contact cards */
+.inquiries {
+  padding: 100px 0;
+  background: var(--bg-2);
+  border-top: 1px solid var(--line);
+}
+.inquiries .section-title { margin-top: 14px; }
+
+/* Grid of inquiry type cards */
+/* EDIT: change repeat(4, 1fr) to repeat(3, 1fr) if you have only 3 cards */
+.inq-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px; /* hairline gap between cards */
+  margin-top: 40px;
+}
+
+/* Individual inquiry card */
+.inq-card {
+  background: var(--card-bg);
+  border: 1px solid var(--line);
+  padding: 36px 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color .25s ease, background .25s ease;
+  position: relative;
+}
+.inq-card:hover {
+  border-color: rgba(255,61,139,0.35);
+  background: rgba(255,61,139,0.03);
+}
+/* Pink accent bar on left edge of card on hover */
+.inq-card::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--pink);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform .3s ease;
+}
+.inq-card:hover::before { transform: scaleY(1); }
+
+/* Category label (e.g. "General") */
+.inq-card .inq-type {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--pink);
+}
+/* Card title */
+.inq-card h4 {
+  font-family: Fraunces, serif;
+  font-weight: 700;
+  font-size: 20px;
+  margin: 0;
+  color: var(--ink);
+}
+/* Description text */
+.inq-card p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  margin: 0;
+  flex-grow: 1;
+}
+/* Clickable email address */
+.inq-card .inq-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--pink-2);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,106,163,0.3);
+  padding-bottom: 3px;
+  transition: color .2s, border-color .2s;
+  word-break: break-all;
+}
+.inq-card .inq-email:hover {
+  color: var(--pink);
+  border-bottom-color: var(--pink);
+}
+.inq-card .inq-email::before {
+  content: "✉";
+  font-style: normal;
+}
+
+/* Response time note below cards */
+.inq-note {
+  margin-top: 28px;
+  text-align: center;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* ════════════════════════════════════════════════════════════
+   FOOTER
+   ════════════════════════════════════════════════════════════ */
+footer {
+  border-top: 1px solid var(--line);
+  padding: 34px 0 30px;
+  background: var(--bg-2);
+  transition: background 0.4s ease;
+}
+/* Two columns: brand left, links right */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: center;
+}
+/* EDIT in HTML: add/remove <a> tags inside .footer-links */
+.footer-links {
+  display: flex;
+  gap: 36px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  justify-content: flex-end;
+}
+.footer-links a { color: inherit; text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--pink); }
+
+/* ════════════════════════════════════════════════════════════
+   PHOTO SLOTS
+   — How to add an actual photo instead of the placeholder —
+
+   Option A (easiest): replace the entire <div class="photo-slot">
+   block with a plain <img> tag:
+
+     <img src="photos/my-photo.jpg"
+          alt="Short description"
+          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+
+   Option B: keep the slot (so the upload-on-click still works)
+   and set its background via inline style:
+
+     <div class="photo-slot has-image" data-slot="hero-1"
+          style="background-image:url('photos/my-photo.jpg');
+                 background-size:cover;background-position:center;">
+       <input type="file" accept="image/*">
+     </div>
+
+   ════════════════════════════════════════════════════════════ */
+.photo-slot {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  /* Diagonal stripe placeholder pattern */
+  background-image:
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0 8px, rgba(255,255,255,0.08) 8px 16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 10px;
+  transition: filter .2s ease, outline .15s ease;
+}
+[data-theme="light"] .photo-slot {
+  background-image:
+    repeating-linear-gradient(45deg, rgba(0,0,0,0.05) 0 8px, rgba(0,0,0,0.10) 8px 16px);
+  color: #aaa;
+}
+/* When a real image is loaded, hide the stripe pattern and label */
+.photo-slot.has-image { background-image: none; }
+.photo-slot.has-image .ph-label { display: none; }
+.photo-slot:hover { filter: brightness(1.15); }
+.photo-slot:hover .ph-label { color: var(--pink); }
+.photo-slot.drag-over { outline: 2px dashed var(--pink); } /* drag-over highlight */
+.photo-slot input[type="file"] { display: none; }
+
+/* ════════════════════════════════════════════════════════════
+   CONTENTEDITABLE FIELDS
+   — Click any text on the page to edit it live in the browser —
+   — Changes auto-save to localStorage —
+   ════════════════════════════════════════════════════════════ */
+[contenteditable="true"] { outline: none; }
+[contenteditable="true"]:hover { box-shadow: inset 0 0 0 1px rgba(255,61,139,0.4); }
+[contenteditable="true"]:focus { box-shadow: inset 0 0 0 1px var(--pink); background: rgba(255,61,139,0.04); }
+
+/* ════════════════════════════════════════════════════════════
+   SCROLL REVEAL ANIMATIONS
+   Elements with class "reveal" start hidden and slide up into view
+   EDIT: change translateY(30px) to a larger value for a bigger drop
+   ════════════════════════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Staggered delay classes — add to .reveal siblings to cascade them in */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ════════════════════════════════════════════════════════════
+   ACCESSIBILITY — reduced motion
+   Disables animations for users who have that OS preference set
+   ════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .hero-marquee .track { animation: none; }
+  .card:hover          { transform: none; }
+  .reveal              { opacity: 1; transform: none; transition: none; }
+  .polaroid            { transition: none; }
+}
+
+/* ════════════════════════════════════════════════════════════
+   RESPONSIVE — tablet (≤ 980px)
+   ════════════════════════════════════════════════════════════ */
+@media (max-width: 980px) {
+  .nav { grid-template-columns: 1fr auto; padding: 14px 20px; }
+  .nav-links { display: none; } /* hide center links on mobile */
+  .wrap  { padding: 0 20px; }
+  .cards { grid-template-columns: 1fr; gap: 20px; }
+  .feature-grid { grid-template-columns: 1fr; gap: 50px; }
+  .feature-copy h2 { font-size: 46px; }
+  .pol-feature { width: 300px; height: 400px; }
+  /* Stack polaroids vertically on mobile instead of overlapping */
+  .hero-stage { height: auto; flex-direction: column; gap: 20px; padding: 20px 0; }
+  .pol-1, .pol-2, .pol-3 { position: relative; transform: rotate(0); }
+  .pol-1 { transform: rotate(-4deg); }
+  .pol-3 { transform: rotate(3deg); }
+  .corner-tag { display: none; }
+  .footer-grid { grid-template-columns: 1fr; gap: 20px; text-align: center; }
+  .footer-links { justify-content: center; flex-wrap: wrap; gap: 18px; }
+  /* Inquiries: 2-col on tablet */
+  .inq-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── Mobile (≤ 600px) ──────────────────────────────────────── */
+@media (max-width: 600px) {
+  .hero { padding: 50px 0 60px; }
+  .section-title { font-size: 30px; }
+  .feature-copy h2 { font-size: 36px; }
+  .submit h3 { font-size: 26px; }
+  .hero-caption .title { font-size: 22px; }
+  /* Inquiries: 1-col on phone */
+  .inq-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
+
+<!-- Film grain texture overlay — decorative, aria-hidden so screen readers skip it -->
 <div class="grain" aria-hidden="true"></div>
 
-<!-- ══ NAV ══════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════════
+     NAVIGATION BAR
+     ─────────────────────────────────────────────────────────
+     EDIT: brand name, nav link labels & hrefs, subscribe button text
+     Add new nav items by duplicating an <a> inside .nav-links
+     ══════════════════════════════════════════════════════════ -->
 <nav class="nav" id="nav">
+
+  <!-- Brand / logo area -->
   <div class="brand">
     <span class="dot" aria-hidden="true"></span>
+    <!-- EDIT: site name displayed in the top-left -->
     <span contenteditable="true" data-persist="brand-name">LOREM ENT.</span>
   </div>
+
+  <!-- Center navigation links -->
+  <!-- data-section must match the id="" of the corresponding <section> below -->
   <nav class="nav-links" aria-label="Primary navigation">
-    <a href="#hero"    class="nav-link active" data-section="hero">Zine</a>
-    <a href="#events"  class="nav-link"         data-section="events">Eventum</a>
-    <a href="#feature" class="nav-link"         data-section="feature">Sonus</a>
-    <a href="#submit"  class="nav-link"         data-section="submit">Archivum</a>
+    <!-- EDIT: change href to #section-id and text to your section name -->
+    <a href="#hero"      class="nav-link active" data-section="hero">Zine</a>
+    <a href="#events"    class="nav-link"         data-section="events">Eventum</a>
+    <a href="#feature"   class="nav-link"         data-section="feature">Sonus</a>
+    <a href="#submit"    class="nav-link"         data-section="submit">Archivum</a>
+    <a href="#inquiries" class="nav-link"         data-section="inquiries">Inquiries</a>
   </nav>
+
+  <!-- Right side buttons -->
   <div class="nav-right">
+    <!-- Theme toggle — switches dark ↔ light, remembers preference -->
     <button class="theme-btn" id="theme-btn" aria-label="Toggle theme" title="Toggle light/dark">
       <span id="theme-icon">☽</span>
     </button>
+    <!-- EDIT: subscribe button label -->
     <button class="pill">Subscribe</button>
   </div>
 </nav>
 
-<!-- ══ HERO ═════════════════════════════════════════════════ -->
+
+<!-- ══════════════════════════════════════════════════════════
+     HERO SECTION
+     ─────────────────────────────────────────────────────────
+     Three polaroid photos + headline caption + scrolling ticker
+     EDIT:
+       • Polaroid captions: text inside each <div class="caption">
+       • Hero headline:     text inside .hero-caption .title
+       • Hero sublabel:     text inside .hero-caption .label
+       • Hero body copy:    text inside .hero-caption .sub
+       • Corner tag label:  CSS .corner-tag::before { content: "…" }
+       • Marquee text:      duplicate <span> pairs inside .track
+     ══════════════════════════════════════════════════════════ -->
 <section class="hero" id="hero">
   <div class="hero-grid-bg" aria-hidden="true"></div>
+  <!-- Dashed decorative square — label text is in CSS ::before above -->
   <div class="corner-tag" aria-hidden="true"></div>
   <div class="wrap">
 
+    <!-- Three polaroid photos arranged in a cluster with parallax -->
     <div class="hero-stage" id="hero-stage">
-      <!-- Polaroid 1 -->
+
+      <!-- ── Polaroid 1 (left) ──────────────────────────────── -->
       <div class="polaroid pol-1" id="pol-1">
         <span class="tape" aria-hidden="true"></span>
         <div class="photo">
+          <!--
+            HOW TO ADD A PHOTO here:
+            Replace this entire <div class="photo-slot"> block with:
+            <img src="photos/your-photo.jpg" alt="Description"
+                 style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+          -->
           <div class="photo-slot" data-slot="hero-1">
-            <span class="ph-label">drop image · 240×240</span>
+            <span class="ph-label">240 × 240 px</span>
             <input type="file" accept="image/*" aria-label="Upload photo for polaroid 1">
           </div>
         </div>
+        <!-- EDIT: caption below the polaroid photo -->
         <div class="caption" contenteditable="true" data-persist="pol-1-caption">Echo Chamber · 04.12</div>
       </div>
 
-      <!-- Polaroid 2 -->
+      <!-- ── Polaroid 2 (center, slightly elevated) ────────── -->
       <div class="polaroid pol-2" id="pol-2">
         <span class="tape" aria-hidden="true"></span>
         <div class="photo">
           <div class="photo-slot" data-slot="hero-2">
-            <span class="ph-label">drop image · 240×240</span>
+            <span class="ph-label">240 × 240 px</span>
             <input type="file" accept="image/*" aria-label="Upload photo for polaroid 2">
           </div>
         </div>
+        <!-- EDIT: caption below the polaroid photo -->
         <div class="caption" contenteditable="true" data-persist="pol-2-caption">Atrium Live · 03.28</div>
       </div>
 
-      <!-- Polaroid 3 -->
+      <!-- ── Polaroid 3 (right) ─────────────────────────────── -->
       <div class="polaroid pol-3" id="pol-3">
         <span class="tape" aria-hidden="true"></span>
         <div class="photo">
           <div class="photo-slot" data-slot="hero-3">
-            <span class="ph-label">drop image · 240×240</span>
+            <span class="ph-label">240 × 240 px</span>
             <input type="file" accept="image/*" aria-label="Upload photo for polaroid 3">
           </div>
         </div>
+        <!-- EDIT: caption below the polaroid photo -->
         <div class="caption" contenteditable="true" data-persist="pol-3-caption">Velvet Hours · 03.14</div>
       </div>
-    </div>
 
+    </div><!-- /hero-stage -->
+
+    <!-- Hero headline block -->
     <div class="hero-caption">
+      <!-- EDIT: small pink label above the headline -->
       <div class="label" contenteditable="true" data-persist="hero-label">Now playing — Lorem &amp; Ipsumera</div>
+      <!-- EDIT: main hero headline (italic serif) -->
       <div class="title" contenteditable="true" data-persist="hero-title">A curated archive of late-night rituals</div>
+      <!-- EDIT: hero body copy -->
       <div class="sub" contenteditable="true" data-persist="hero-sub">Lorem ipsum dolor sit amet, consectetur adipiscing elit. We document indie culture and the sounds that define the underground — issue by issue, night by night.</div>
     </div>
 
+    <!-- ── Scrolling marquee ticker ───────────────────────── -->
+    <!--
+      EDIT: Update the <span> text items below.
+      IMPORTANT: Keep content doubled (appears twice) for seamless loop.
+      Pattern: <span>Item text</span><span class="mdot">●</span>
+      Add a new item by adding another <span>…</span><span class="mdot">●</span>
+      pair to BOTH the first half AND the second half of the track.
+    -->
     <div class="hero-marquee" aria-hidden="true">
       <div class="track" id="marquee-track">
+        <!-- First copy -->
         <span>Issue 04 out now</span><span class="mdot">●</span>
         <span>Field reports from Brooklyn</span><span class="mdot">●</span>
         <span>Tickets · Mercurium · Apr 14</span><span class="mdot">●</span>
         <span>Submissions open</span><span class="mdot">●</span>
+        <!-- Second copy (duplicate) — required for seamless infinite scroll -->
         <span>Issue 04 out now</span><span class="mdot">●</span>
         <span>Field reports from Brooklyn</span><span class="mdot">●</span>
         <span>Tickets · Mercurium · Apr 14</span><span class="mdot">●</span>
         <span>Submissions open</span><span class="mdot">●</span>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ══ EVENTS ════════════════════════════════════════════════ -->
+  </div><!-- /wrap -->
+</section><!-- /hero -->
+
+
+<!-- ══════════════════════════════════════════════════════════
+     EVENTS / DISPATCHES SECTION
+     ─────────────────────────────────────────────────────────
+     Three event cards in a grid.
+     EDIT:
+       • Section eyebrow tag: text in <span class="eyebrow">
+       • Section heading:     text in <h2 class="section-title">
+       • Per-card badge:      text in <span class="badge">
+       • Per-card title:      text in <h3>
+       • Per-card body:       text in <p>
+       • Per-card CTA link:   text and href on <a class="more">
+       • Add a card:          duplicate an <article class="card"> block
+       • Remove a card:       delete an <article class="card"> block
+     ══════════════════════════════════════════════════════════ -->
 <section class="events" id="events">
   <div class="wrap">
+
+    <!-- Section header row -->
     <div class="section-head">
       <div>
+        <!-- EDIT: small tag above the heading -->
         <span class="eyebrow" contenteditable="true" data-persist="events-eyebrow">Dispatches</span>
+        <!-- EDIT: section heading -->
         <h2 class="section-title" contenteditable="true" data-persist="events-title">Recent events</h2>
       </div>
+      <!-- EDIT: "View all" link href -->
       <a class="see-all" href="#">View all archive</a>
     </div>
 
+    <!-- Card grid -->
     <div class="cards">
+
+      <!-- ── Card 1 ──────────────────────────────────────── -->
+      <!-- "reveal" class makes it fade-in on scroll; "reveal-delay-N" staggers timing -->
       <article class="card reveal">
         <div class="img">
+          <!--
+            HOW TO ADD A PHOTO to this card:
+            Replace the photo-slot block with:
+            <img src="photos/event1.jpg" alt="Event description"
+                 style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+          -->
           <div class="photo-slot" data-slot="card-1">
-            <span class="ph-label">drop image · 4:5</span>
+            <span class="ph-label">4 : 5 portrait</span>
             <input type="file" accept="image/*">
           </div>
+          <!-- EDIT: badge text overlaid on the photo -->
           <span class="badge" contenteditable="true" data-persist="card-1-badge">SET · Lorem</span>
         </div>
         <div class="meta">
+          <!-- EDIT: card title -->
           <h3 contenteditable="true" data-persist="card-1-title">The Atrium Recital</h3>
-          <p contenteditable="true" data-persist="card-1-body">A night of slow-burn drone and re-tuned noise at the boiler room. Ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <!-- EDIT: card body text -->
+          <p  contenteditable="true" data-persist="card-1-body">A night of slow-burn drone and re-tuned noise at the boiler room. Ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <!-- EDIT: CTA link label and href -->
           <a class="more" href="#" contenteditable="true" data-persist="card-1-cta">Read field report</a>
         </div>
       </article>
 
+      <!-- ── Card 2 ──────────────────────────────────────── -->
       <article class="card reveal reveal-delay-1">
         <div class="img">
           <div class="photo-slot" data-slot="card-2">
-            <span class="ph-label">drop image · 4:5</span>
+            <span class="ph-label">4 : 5 portrait</span>
             <input type="file" accept="image/*">
           </div>
           <span class="badge" contenteditable="true" data-persist="card-2-badge">SET · Ipsum</span>
         </div>
         <div class="meta">
           <h3 contenteditable="true" data-persist="card-2-title">Dirty Pop Experiment</h3>
-          <p contenteditable="true" data-persist="card-2-body">Exploring the glittering underbelly of a future-pop collective in Brooklyn. Vivamus lacinia odio vitae vestibulum.</p>
+          <p  contenteditable="true" data-persist="card-2-body">Exploring the glittering underbelly of a future-pop collective in Brooklyn. Vivamus lacinia odio vitae vestibulum.</p>
           <a class="more" href="#" contenteditable="true" data-persist="card-2-cta">Read interview</a>
         </div>
       </article>
 
+      <!-- ── Card 3 ──────────────────────────────────────── -->
       <article class="card reveal reveal-delay-2">
         <div class="img">
           <div class="photo-slot" data-slot="card-3">
-            <span class="ph-label">drop image · 4:5</span>
+            <span class="ph-label">4 : 5 portrait</span>
             <input type="file" accept="image/*">
           </div>
           <span class="badge" contenteditable="true" data-persist="card-3-badge">SET · Dolor</span>
         </div>
         <div class="meta">
           <h3 contenteditable="true" data-persist="card-3-title">Neon After-Hours</h3>
-          <p contenteditable="true" data-persist="card-3-body">Sustaining the buzz and back-roar of the summer season — curabitur lobortis venenatis ipsum, ac sagittis.</p>
+          <p  contenteditable="true" data-persist="card-3-body">Sustaining the buzz and back-roar of the summer season — curabitur lobortis venenatis ipsum, ac sagittis.</p>
           <a class="more" href="#" contenteditable="true" data-persist="card-3-cta">Read photo essay</a>
         </div>
       </article>
-    </div>
-  </div>
-</section>
 
-<!-- ══ FEATURE / PRINT ISSUE ══════════════════════════════════ -->
+      <!--
+        TO ADD A 4TH CARD, copy-paste this block:
+
+        <article class="card reveal reveal-delay-3">
+          <div class="img">
+            <div class="photo-slot" data-slot="card-4">
+              <span class="ph-label">4 : 5 portrait</span>
+              <input type="file" accept="image/*">
+            </div>
+            <span class="badge">SET · Title</span>
+          </div>
+          <div class="meta">
+            <h3>Card Title Here</h3>
+            <p>Card description text here.</p>
+            <a class="more" href="#">Read more</a>
+          </div>
+        </article>
+      -->
+
+    </div><!-- /cards -->
+  </div><!-- /wrap -->
+</section><!-- /events -->
+
+
+<!-- ══════════════════════════════════════════════════════════
+     FEATURE / PRINT ISSUE SECTION
+     ─────────────────────────────────────────────────────────
+     Oversized polaroid on left, editorial copy on right.
+     EDIT:
+       • Issue number watermark: text in <div class="issue-no">
+       • Stamp text (bottom-left of polaroid): <div class="stamp">
+       • Price (bottom-right of polaroid):     <div class="price">
+       • Label, headline, body, specs:         see comments inline
+     ══════════════════════════════════════════════════════════ -->
 <section class="feature reveal" id="feature">
   <div class="wrap">
     <div class="feature-grid">
 
+      <!-- Left: oversized polaroid with pink shadow -->
       <div class="pol-feature">
         <div class="pink-shadow" aria-hidden="true"></div>
         <div class="frame">
           <span class="tape" aria-hidden="true"></span>
           <div class="photo">
+            <!--
+              HOW TO ADD A PHOTO here:
+              Replace the photo-slot block with:
+              <img src="photos/cover.jpg" alt="Issue 04 cover"
+                   style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+            -->
             <div class="photo-slot" data-slot="feature-1">
-              <span class="ph-label">drop cover image · 3:4</span>
+              <span class="ph-label">cover · 3 : 4 portrait</span>
               <input type="file" accept="image/*">
             </div>
+            <!-- EDIT: large issue number watermarked over the photo -->
             <div class="issue-no" aria-hidden="true">04</div>
           </div>
+          <!-- EDIT: bottom-left stamp label -->
           <div class="stamp" contenteditable="true" data-persist="feature-stamp">No. 04 — The print issue</div>
+          <!-- EDIT: bottom-right price -->
           <div class="price" contenteditable="true" data-persist="feature-price">$15.00</div>
         </div>
       </div>
 
+      <!-- Right: editorial copy block -->
       <div class="feature-copy">
+        <!-- EDIT: small pink label above headline -->
         <span class="label" contenteditable="true" data-persist="feature-label">New release</span>
+
+        <!-- EDIT: two-line headline — first span is italic, <em> is upright -->
         <h2>
           <span contenteditable="true" data-persist="feature-h2-line1">The print issue</span>
-          <em contenteditable="true" data-persist="feature-h2-line2">No. 04</em>
+          <em   contenteditable="true" data-persist="feature-h2-line2">No. 04</em>
         </h2>
+
+        <!-- EDIT: body copy paragraph -->
         <p contenteditable="true" data-persist="feature-body">Lorem ipsum dolor sit amet — 108 pages of new photography, interviews with the ghosts of the indie scene, and exclusive artwork. Printed on recycled heavy stock; perfect-bound; first digital edition; no reprints.</p>
+
+        <!-- CTA buttons row -->
         <div class="row">
+          <!-- EDIT: primary CTA text -->
           <button class="pill">Reserve a copy</button>
+          <!-- EDIT: secondary link text and href -->
           <a class="see-all" href="#" style="margin-left:6px">Preview spreads</a>
         </div>
+
+        <!-- Specs row — EDIT the <strong> values for each stat -->
         <div class="specs">
           <div><strong>108pp</strong>perfect bound</div>
           <div><strong>250×340</strong>millimeters</div>
           <div><strong>Edition</strong>1 of 1,200</div>
+          <!--
+            TO ADD ANOTHER SPEC: copy-paste a <div> block:
+            <div><strong>Value</strong>label</div>
+          -->
         </div>
       </div>
 
-    </div>
-  </div>
-</section>
+    </div><!-- /feature-grid -->
+  </div><!-- /wrap -->
+</section><!-- /feature -->
 
-<!-- ══ SUBMIT ════════════════════════════════════════════════ -->
+
+<!-- ══════════════════════════════════════════════════════════
+     SUBMIT / CONTRIBUTIONS SECTION
+     ─────────────────────────────────────────────────────────
+     Centered call-to-action with category filter chips.
+     EDIT:
+       • Heading: text in <h3>
+       • Body:    text in <p>
+       • Chips:   add/remove <button class="chip"> inside #chips
+       • Link:    href and text on <a class="submit-link">
+     ══════════════════════════════════════════════════════════ -->
 <section class="submit reveal" id="submit">
   <div class="wrap">
+    <!-- EDIT: section heading -->
     <h3 contenteditable="true" data-persist="submit-title">Have something to say?</h3>
-    <p contenteditable="true" data-persist="submit-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. We accept rolling submissions in any of the categories below.</p>
+    <!-- EDIT: body copy -->
+    <p  contenteditable="true" data-persist="submit-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. We accept rolling submissions in any of the categories below.</p>
+
+    <!-- Filter chips — click to toggle active state -->
+    <!-- EDIT: add/remove <button class="chip"> to change categories -->
     <div class="chips" id="chips">
       <button class="chip">Photography</button>
       <button class="chip active">Field Notes</button>
       <button class="chip">Discography</button>
       <button class="chip">Interview</button>
+      <!--
+        TO ADD A CHIP:
+        <button class="chip">Your Category</button>
+      -->
     </div>
+
+    <!-- EDIT: CTA link href and label -->
     <div><a class="submit-link" href="#">Contribute to the archive →</a></div>
   </div>
-</section>
+</section><!-- /submit -->
 
-<!-- ══ FOOTER ════════════════════════════════════════════════ -->
+
+<!-- ══════════════════════════════════════════════════════════
+     INQUIRIES SECTION
+     ─────────────────────────────────────────────────────────
+     Grid of email contact cards for different inquiry types.
+
+     EDIT EMAILS: find each <a class="inq-email" href="mailto:…">
+     and replace the email address in both the href AND the
+     visible link text.
+
+     Example:
+       href="mailto:hello@yourdomain.com"  ← where it sends
+       >hello@yourdomain.com</a>            ← what's displayed
+
+     EDIT CATEGORIES: change the card title, type label, and
+     description text for each card.
+
+     ADD A CARD: duplicate an <div class="inq-card"> block and
+     update its content. Also change .inq-grid grid-template-columns
+     in the CSS above if you change the card count.
+
+     REMOVE A CARD: delete the entire <div class="inq-card"> block.
+     ══════════════════════════════════════════════════════════ -->
+<section class="inquiries reveal" id="inquiries">
+  <div class="wrap">
+
+    <!-- Section header -->
+    <div class="section-head">
+      <div>
+        <!-- EDIT: eyebrow tag text -->
+        <span class="eyebrow">Contact</span>
+        <!-- EDIT: section heading -->
+        <h2 class="section-title">Get in touch</h2>
+      </div>
+    </div>
+
+    <!-- Inquiry type cards grid -->
+    <div class="inq-grid">
+
+      <!-- ── Card: General ────────────────────────────────── -->
+      <div class="inq-card">
+        <!-- EDIT: category label (small pink text at top) -->
+        <span class="inq-type">General</span>
+        <!-- EDIT: card heading -->
+        <h4>Hello &amp; Questions</h4>
+        <!-- EDIT: card description -->
+        <p>For general questions, feedback on the zine, or anything that doesn't fit another category. We read every message.</p>
+        <!--
+          EDIT EMAIL: replace both the href value and the link text
+          with your actual email address.
+        -->
+        <a class="inq-email" href="mailto:hello@lorement.com">hello@lorement.com</a>
+      </div>
+
+      <!-- ── Card: Press & Media ───────────────────────────── -->
+      <div class="inq-card">
+        <!-- EDIT: category label -->
+        <span class="inq-type">Press &amp; Media</span>
+        <!-- EDIT: card heading -->
+        <h4>Press Inquiries</h4>
+        <!-- EDIT: card description -->
+        <p>Review copies, editorial features, interview requests, and media kit. Please include your publication and deadline.</p>
+        <!--
+          EDIT EMAIL: replace with your press/media contact address.
+        -->
+        <a class="inq-email" href="mailto:press@lorement.com">press@lorement.com</a>
+      </div>
+
+      <!-- ── Card: Bookings ────────────────────────────────── -->
+      <div class="inq-card">
+        <!-- EDIT: category label -->
+        <span class="inq-type">Bookings</span>
+        <!-- EDIT: card heading -->
+        <h4>Events &amp; Bookings</h4>
+        <!-- EDIT: card description -->
+        <p>Event partnerships, venue inquiries, DJ and artist bookings, and collaborative programming proposals.</p>
+        <!--
+          EDIT EMAIL: replace with your bookings contact address.
+        -->
+        <a class="inq-email" href="mailto:bookings@lorement.com">bookings@lorement.com</a>
+      </div>
+
+      <!-- ── Card: Partnerships ───────────────────────────── -->
+      <div class="inq-card">
+        <!-- EDIT: category label -->
+        <span class="inq-type">Partnerships</span>
+        <!-- EDIT: card heading -->
+        <h4>Brand &amp; Collab</h4>
+        <!-- EDIT: card description -->
+        <p>Sponsorship opportunities, brand partnerships, advertising in the print issue, and creative collaborations.</p>
+        <!--
+          EDIT EMAIL: replace with your partnerships contact address.
+        -->
+        <a class="inq-email" href="mailto:partners@lorement.com">partners@lorement.com</a>
+      </div>
+
+      <!--
+        TO ADD ANOTHER INQUIRY CARD, copy-paste this block
+        and update all the EDIT values:
+
+        <div class="inq-card">
+          <span class="inq-type">Category Label</span>
+          <h4>Card Heading</h4>
+          <p>Short description of what this inbox handles.</p>
+          <a class="inq-email" href="mailto:you@yourdomain.com">you@yourdomain.com</a>
+        </div>
+
+        Also update .inq-grid in CSS:
+          grid-template-columns: repeat(5, 1fr);  ← for 5 cards
+      -->
+
+    </div><!-- /inq-grid -->
+
+    <!-- EDIT: response time note below the cards -->
+    <p class="inq-note">We aim to respond within 3–5 business days.</p>
+
+  </div><!-- /wrap -->
+</section><!-- /inquiries -->
+
+
+<!-- ══════════════════════════════════════════════════════════
+     FOOTER
+     ─────────────────────────────────────────────────────────
+     Brand name on left, navigation links on right.
+     EDIT:
+       • Brand name: text in the <span> inside .brand
+       • Links: add/remove <a> tags inside .footer-links
+     ══════════════════════════════════════════════════════════ -->
 <footer>
   <div class="wrap footer-grid">
+
+    <!-- Left: brand name -->
     <div class="brand">
       <span class="dot" aria-hidden="true"></span>
+      <!-- EDIT: footer brand name -->
       <span contenteditable="true" data-persist="footer-brand">LOREM ENT.</span>
     </div>
+
+    <!-- Right: footer navigation links -->
+    <!-- EDIT: add/remove <a> tags; update href and text -->
     <div class="footer-links">
       <a href="#">Privacy</a>
       <a href="#">Contact</a>
       <a href="#">Submissions</a>
       <a href="#">About</a>
+      <!--
+        TO ADD A FOOTER LINK:
+        <a href="/your-page">Label</a>
+      -->
     </div>
-    <div class="footer-meta">
-      © <span id="copy-year"></span> · <span contenteditable="true" data-persist="footer-meta">Lorem Editorial · NYC</span>
-    </div>
+
   </div>
 </footer>
 
+
+<!-- ══════════════════════════════════════════════════════════
+     JAVASCRIPT
+     All interactive behaviour lives here.
+     Each feature is numbered and labelled.
+     ══════════════════════════════════════════════════════════ -->
 <script>
 (function () {
   'use strict';
 
-  /* ── 1. Dynamic copyright year ─────────────────────────── */
-  document.getElementById('copy-year').textContent = new Date().getFullYear();
+  /* ══════════════════════════════════════════════════════════
+     1. THEME TOGGLE
+     Reads system preference on first load, then toggles on click.
+     Preference is remembered in localStorage.
+     ══════════════════════════════════════════════════════════ */
+  const html      = document.documentElement;
+  const themeBtn  = document.getElementById('theme-btn');
+  const themeIcon = document.getElementById('theme-icon');
+  const THEME_KEY = 'lorem-ent-theme'; /* localStorage key */
 
-  /* ── 2. Theme toggle (localStorage + system preference) ── */
-  const html = document.documentElement;
-  const themeBtn = document.getElementById('theme-btn');
-  const themeIcon = document.getElementById('themeIcon') || document.getElementById('theme-icon');
-  const THEME_KEY = 'lorem-ent-theme';
-
+  /* Return 'light' or 'dark' based on OS setting */
   function getSystemTheme() {
     return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
   }
 
+  /* Apply theme to <html data-theme="…"> and update the icon */
   function applyTheme(theme) {
     html.setAttribute('data-theme', theme);
     if (themeIcon) themeIcon.textContent = theme === 'dark' ? '☽' : '☀';
     localStorage.setItem(THEME_KEY, theme);
   }
 
-  const savedTheme = localStorage.getItem(THEME_KEY) || getSystemTheme();
-  applyTheme(savedTheme);
+  /* On load: use saved preference, or fall back to OS setting */
+  applyTheme(localStorage.getItem(THEME_KEY) || getSystemTheme());
 
+  /* Toggle on button click */
   themeBtn.addEventListener('click', () => {
-    const current = html.getAttribute('data-theme') || 'dark';
-    applyTheme(current === 'dark' ? 'light' : 'dark');
+    applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
   });
 
-  // Respond to system theme changes when no manual override was made
+  /* Follow OS changes only if the user hasn't manually overridden */
   window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
-    if (!localStorage.getItem(THEME_KEY)) {
-      applyTheme(e.matches ? 'light' : 'dark');
-    }
+    if (!localStorage.getItem(THEME_KEY)) applyTheme(e.matches ? 'light' : 'dark');
   });
 
-  /* ── 3. localStorage persistence for contenteditable ───── */
-  function persistText(el) {
-    const key = el.dataset.persist;
-    if (!key) return;
-    const saved = localStorage.getItem('persist-' + key);
+
+  /* ══════════════════════════════════════════════════════════
+     2. CONTENTEDITABLE PERSISTENCE
+     Every element with data-persist="key" saves its inner HTML
+     to localStorage on blur/input, and restores it on page load.
+     This lets in-browser edits survive a page refresh.
+     ══════════════════════════════════════════════════════════ */
+  function restoreText(el) {
+    const saved = localStorage.getItem('persist-' + el.dataset.persist);
     if (saved !== null) el.innerHTML = saved;
   }
-
   function saveText(el) {
-    const key = el.dataset.persist;
-    if (!key) return;
-    localStorage.setItem('persist-' + key, el.innerHTML);
+    localStorage.setItem('persist-' + el.dataset.persist, el.innerHTML);
   }
 
   document.querySelectorAll('[contenteditable="true"][data-persist]').forEach(el => {
-    persistText(el);
-    el.addEventListener('blur', () => saveText(el));
+    restoreText(el);
+    el.addEventListener('blur',  () => saveText(el));
     el.addEventListener('input', () => saveText(el));
   });
 
-  /* ── 4. Photo slots — click upload + drag & drop ────────── */
-  function loadImageIntoSlot(slot, file) {
-    if (!file || !file.type.startsWith('image/')) return;
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      const url = e.target.result;
-      applyImageToSlot(slot, url);
-      const slotKey = slot.dataset.slot;
-      if (slotKey) {
-        try { localStorage.setItem('img-' + slotKey, url); } catch (_) {}
-      }
-    };
-    reader.readAsDataURL(file);
-  }
 
-  function applyImageToSlot(slot, url) {
-    slot.style.backgroundImage = 'url("' + url + '")';
-    slot.style.backgroundSize = 'cover';
+  /* ══════════════════════════════════════════════════════════
+     3. PHOTO SLOTS — click to upload or drag-and-drop
+     Photo slots stay blank on page load (images are NOT saved
+     to localStorage — add photos directly in the HTML).
+     ══════════════════════════════════════════════════════════ */
+
+  /* Apply a loaded image to a slot element */
+  function applyImage(slot, dataUrl) {
+    slot.style.backgroundImage    = 'url("' + dataUrl + '")';
+    slot.style.backgroundSize     = 'cover';
     slot.style.backgroundPosition = 'center';
     slot.classList.add('has-image');
+  }
+
+  /* Handle a File object dropped or selected into a slot */
+  function handleFile(slot, file) {
+    if (!file || !file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = e => applyImage(slot, e.target.result);
+    reader.readAsDataURL(file);
   }
 
   document.querySelectorAll('.photo-slot').forEach(slot => {
     const input = slot.querySelector('input[type="file"]');
 
-    // Restore persisted image
-    const slotKey = slot.dataset.slot;
-    if (slotKey) {
-      try {
-        const saved = localStorage.getItem('img-' + slotKey);
-        if (saved) applyImageToSlot(slot, saved);
-      } catch (_) {}
-    }
-
-    // Click to upload
+    /* Click anywhere on the slot to open the file picker */
     slot.addEventListener('click', e => {
       if (e.target.tagName !== 'INPUT' && input) input.click();
     });
+
+    /* File picker change event */
     if (input) {
       input.addEventListener('change', e => {
         const f = e.target.files && e.target.files[0];
-        if (f) loadImageIntoSlot(slot, f);
+        if (f) handleFile(slot, f);
       });
     }
 
-    // Drag and drop
+    /* Drag-over: show dashed pink outline */
     slot.addEventListener('dragover', e => {
       e.preventDefault();
       slot.classList.add('drag-over');
     });
-    slot.addEventListener('dragleave', () => {
-      slot.classList.remove('drag-over');
-    });
+    slot.addEventListener('dragleave', () => slot.classList.remove('drag-over'));
+
+    /* Drop: load the dragged image file */
     slot.addEventListener('drop', e => {
       e.preventDefault();
       slot.classList.remove('drag-over');
       const f = e.dataTransfer.files && e.dataTransfer.files[0];
-      if (f) loadImageIntoSlot(slot, f);
+      if (f) handleFile(slot, f);
     });
   });
 
-  /* ── 5. Chip toggle ─────────────────────────────────────── */
+
+  /* ══════════════════════════════════════════════════════════
+     4. FILTER CHIP TOGGLE
+     Clicking a chip in the submit section makes it active (pink).
+     Only one chip is active at a time.
+     ══════════════════════════════════════════════════════════ */
   document.querySelectorAll('#chips .chip').forEach(chip => {
     chip.addEventListener('click', () => {
       document.querySelectorAll('#chips .chip').forEach(c => c.classList.remove('active'));
@@ -1114,30 +1722,43 @@
     });
   });
 
-  /* ── 6. Scroll-reveal via IntersectionObserver ──────────── */
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (!prefersReducedMotion) {
-    const revealObserver = new IntersectionObserver((entries) => {
+  /* ══════════════════════════════════════════════════════════
+     5. SCROLL-REVEAL ANIMATIONS
+     Elements with class "reveal" fade + slide up when they
+     enter the viewport. Uses IntersectionObserver for performance.
+     Disabled automatically if user prefers reduced motion.
+     ══════════════════════════════════════════════════════════ */
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!reducedMotion) {
+    const revealObs = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('revealed');
-          revealObserver.unobserve(entry.target);
+          revealObs.unobserve(entry.target); /* reveal once, then stop watching */
         }
       });
     }, { threshold: 0.12 });
 
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
   } else {
-    // Skip animation: reveal all immediately
+    /* Skip animation: make all revealed immediately */
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('revealed'));
   }
 
-  /* ── 7. Active nav highlight via IntersectionObserver ───── */
-  const sections = ['hero', 'events', 'feature', 'submit'];
+
+  /* ══════════════════════════════════════════════════════════
+     6. ACTIVE NAV HIGHLIGHT
+     Watches each section with IntersectionObserver and highlights
+     the matching nav link when that section is in the viewport.
+     ══════════════════════════════════════════════════════════ */
   const navLinks = document.querySelectorAll('.nav-link');
 
-  const sectionObserver = new IntersectionObserver((entries) => {
+  /* EDIT: add/remove section IDs here if you add/remove sections */
+  const sectionIds = ['hero', 'events', 'feature', 'submit', 'inquiries'];
+
+  const navObs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const id = entry.target.id;
@@ -1148,61 +1769,65 @@
     });
   }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
 
-  sections.forEach(id => {
+  sectionIds.forEach(id => {
     const el = document.getElementById(id);
-    if (el) sectionObserver.observe(el);
+    if (el) navObs.observe(el);
   });
 
-  /* ── 8. Polaroid parallax on hero mousemove ─────────────── */
-  if (!prefersReducedMotion) {
+
+  /* ══════════════════════════════════════════════════════════
+     7. POLAROID PARALLAX
+     On desktop, moving the mouse over the hero shifts the three
+     polaroids in slightly different directions to create depth.
+     Uses requestAnimationFrame with lerp (smooth easing).
+     Disabled if user prefers reduced motion.
+     ══════════════════════════════════════════════════════════ */
+  if (!reducedMotion) {
     const hero = document.querySelector('.hero');
     const pol1 = document.getElementById('pol-1');
     const pol2 = document.getElementById('pol-2');
     const pol3 = document.getElementById('pol-3');
 
-    // Base transforms (in px offset from base CSS rotation)
-    const baseTransforms = {
+    /* Base CSS positions for each polaroid — keep in sync with CSS */
+    const base = {
       pol1: { x: -180, y: 0,   r: -9 },
       pol2: { x: 0,    y: -12, r: 2  },
-      pol3: { x: 180,  y: 8,   r: 8  }
+      pol3: { x: 180,  y: 8,   r: 8  },
     };
 
-    let rafId = null;
+    let rafId = null, animating = false;
     let targetX = 0, targetY = 0;
     let currentX = 0, currentY = 0;
 
-    function applyParallax() {
+    /* Smooth animation loop — lerps toward target cursor offset */
+    function tick() {
       currentX += (targetX - currentX) * 0.08;
       currentY += (targetY - currentY) * 0.08;
 
-      if (pol1) pol1.style.transform = `rotate(${baseTransforms.pol1.r}deg) translate(${baseTransforms.pol1.x + currentX * -1.2}px, ${baseTransforms.pol1.y + currentY * -0.8}px)`;
-      if (pol2) pol2.style.transform = `rotate(${baseTransforms.pol2.r}deg) translate(${baseTransforms.pol2.x + currentX * 0.3}px,  ${baseTransforms.pol2.y + currentY * 0.4}px)`;
-      if (pol3) pol3.style.transform = `rotate(${baseTransforms.pol3.r}deg) translate(${baseTransforms.pol3.x + currentX * 1.1}px,  ${baseTransforms.pol3.y + currentY * 0.9}px)`;
+      /* Each polaroid moves at a different multiplier to create depth layers */
+      if (pol1) pol1.style.transform = `rotate(${base.pol1.r}deg) translate(${base.pol1.x + currentX * -1.2}px, ${base.pol1.y + currentY * -0.8}px)`;
+      if (pol2) pol2.style.transform = `rotate(${base.pol2.r}deg) translate(${base.pol2.x + currentX *  0.3}px, ${base.pol2.y + currentY *  0.4}px)`;
+      if (pol3) pol3.style.transform = `rotate(${base.pol3.r}deg) translate(${base.pol3.x + currentX *  1.1}px, ${base.pol3.y + currentY *  0.9}px)`;
 
-      rafId = requestAnimationFrame(applyParallax);
+      rafId = requestAnimationFrame(tick);
     }
 
-    let animating = false;
-
+    /* Start tracking on mousemove */
     hero.addEventListener('mousemove', e => {
       const rect = hero.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      targetX = (e.clientX - cx) / rect.width * 16;
-      targetY = (e.clientY - cy) / rect.height * 10;
-
-      if (!animating) {
-        animating = true;
-        rafId = requestAnimationFrame(applyParallax);
-      }
+      /* Offset from center of hero, normalised to ±16px / ±10px */
+      targetX = (e.clientX - (rect.left + rect.width  / 2)) / rect.width  * 16;
+      targetY = (e.clientY - (rect.top  + rect.height / 2)) / rect.height * 10;
+      if (!animating) { animating = true; rafId = requestAnimationFrame(tick); }
     });
 
+    /* Stop and reset when mouse leaves the hero */
     hero.addEventListener('mouseleave', () => {
-      targetX = 0;
-      targetY = 0;
+      targetX = 0; targetY = 0;
       setTimeout(() => {
         cancelAnimationFrame(rafId);
         animating = false;
+        /* Reset inline transforms so CSS takes back over */
         if (pol1) pol1.style.transform = '';
         if (pol2) pol2.style.transform = '';
         if (pol3) pol3.style.transform = '';
@@ -1210,76 +1835,46 @@
     });
   }
 
-  /* ── 9. Viewport resize handler (debounced 50ms) ────────── */
+
+  /* ══════════════════════════════════════════════════════════
+     8. VIEWPORT RESIZE HANDLER
+     Adjusts the hero stage height for desktop vs mobile.
+     Debounced at 50ms to avoid firing on every pixel change.
+     ══════════════════════════════════════════════════════════ */
   let resizeTimer;
   function onResize() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-      const isMobile = window.innerWidth <= 980;
-      const heroStage = document.getElementById('hero-stage');
-      if (!heroStage) return;
-      if (isMobile) {
-        heroStage.style.height = 'auto';
-      } else {
-        heroStage.style.height = '380px';
-      }
+      const stage = document.getElementById('hero-stage');
+      if (!stage) return;
+      /* On mobile the polaroids stack vertically so height = auto */
+      stage.style.height = window.innerWidth <= 980 ? 'auto' : '380px';
     }, 50);
   }
   window.addEventListener('resize', onResize);
-  onResize();
+  onResize(); /* run once on load */
 
-  /* ── 10. Polaroid drag-to-reorder ───────────────────────── */
-  let draggingPol = null;
-  let startX, startY, startLeft, startTop;
 
-  document.querySelectorAll('.polaroid').forEach(pol => {
-    pol.addEventListener('mousedown', e => {
-      // Don't hijack contenteditable clicks or photo slot clicks
-      if (e.target.closest('[contenteditable]') || e.target.closest('.photo-slot')) return;
-      draggingPol = pol;
-      const rect = pol.getBoundingClientRect();
-      startX = e.clientX;
-      startY = e.clientY;
-      pol.style.zIndex = 10;
-      pol.style.transition = 'box-shadow 0.3s ease';
-      e.preventDefault();
-    });
-  });
-
-  document.addEventListener('mousemove', e => {
-    if (!draggingPol) return;
-    const dx = e.clientX - startX;
-    const dy = e.clientY - startY;
-    const currentTransform = draggingPol.style.transform || '';
-    const baseMatch = currentTransform.match(/rotate\(([^)]+)\)/);
-    const baseRot = baseMatch ? baseMatch[1] : '0deg';
-    draggingPol.style.transform = `rotate(${baseRot}) translate(${dx}px, ${dy}px)`;
-  });
-
-  document.addEventListener('mouseup', () => {
-    if (!draggingPol) return;
-    draggingPol.style.zIndex = '';
-    draggingPol.style.transform = '';
-    draggingPol = null;
-  });
-
-  /* ── 11. Subscribe button interaction ───────────────────── */
+  /* ══════════════════════════════════════════════════════════
+     9. CTA BUTTON FEEDBACK
+     Pill buttons show a brief "✓ Done!" confirmation on click.
+     ══════════════════════════════════════════════════════════ */
   document.querySelectorAll('.pill:not(.ghost)').forEach(btn => {
-    btn.addEventListener('click', e => {
-      if (e.target.textContent.includes('Subscribe') || e.target.textContent.includes('Reserve')) {
-        btn.textContent = '✓ Done!';
-        btn.style.background = '#2a9d2a';
-        btn.style.boxShadow = '0 8px 30px -10px rgba(42,157,42,0.5)';
-        setTimeout(() => {
-          btn.textContent = btn.textContent.includes('Done') ? 'Subscribe' : 'Reserve a copy';
-          btn.style.background = '';
-          btn.style.boxShadow = '';
-        }, 2200);
-      }
+    const originalLabel = btn.textContent.trim();
+    btn.addEventListener('click', () => {
+      btn.textContent = '✓ Done!';
+      btn.style.background = '#2a9d2a';
+      btn.style.boxShadow  = '0 8px 30px -10px rgba(42,157,42,0.5)';
+      setTimeout(() => {
+        btn.textContent  = originalLabel;
+        btn.style.background = '';
+        btn.style.boxShadow  = '';
+      }, 2200);
     });
   });
 
-})();
+
+})(); /* end IIFE */
 </script>
 </body>
 </html>
