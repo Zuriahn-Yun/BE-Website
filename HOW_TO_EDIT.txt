@@ -1,0 +1,194 @@
+BE-WEBSITE — EDITING GUIDE
+==========================
+File: index.html  (the entire site is in this one file)
+Photos folder: photos/  (put your image files here)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ HOW TO EDIT & PUSH TO GITHUB
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Open the folder in VS Code (or any text editor).
+2. Edit index.html — see the sections below for what to change.
+3. Save the file (Ctrl+S).
+4. Open a terminal in the project folder and run:
+
+     git add index.html
+     git commit -m "describe what you changed"
+     git push
+
+   If this is your first push on a new machine:
+     git push -u origin main
+
+That's it. The site updates on GitHub automatically.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ WHAT EACH SECTION IS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NAVIGATION BAR (top of page)
+  — Site name on the left, nav links in the center,
+    theme toggle + Subscribe button on the right.
+  — In the HTML, search for: <nav class="nav"
+
+HERO SECTION (big top area)
+  — Three polaroid-style photos arranged in a cluster.
+    Mouse movement makes them shift slightly (parallax).
+  — Headline text, subtitle, and a small pink label sit below.
+  — In the HTML, search for: <section class="hero"
+
+EVENTS / DISPATCHES SECTION
+  — Three portrait-style cards in a grid.
+    Each card has a photo, badge label, title, body text, and a link.
+  — In the HTML, search for: <section class="events"
+
+FEATURE / PRINT ISSUE SECTION
+  — Dark wine-colored section. Large polaroid on the left with a
+    pink shadow, editorial copy (headline, body, specs) on the right.
+  — In the HTML, search for: <section class="feature"
+
+SUBMIT / CONTRIBUTIONS SECTION
+  — Centered call-to-action with clickable category chips.
+  — In the HTML, search for: <section class="submit"
+
+CONTACT / INQUIRIES SECTION  ← see note below about email
+  — Grid of contact cards. Currently has 4 cards with 4 emails.
+  — In the HTML, search for: <section class="inquiries"
+
+FOOTER (bottom)
+  — Brand name on the left, small nav links on the right.
+  — In the HTML, search for: <footer>
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ HOW TO ADD PHOTOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Step 1 — Put your image file in the photos/ folder.
+         Example: photos/event1.jpg
+
+Step 2 — In index.html, find the photo slot you want to replace.
+         There are 7 photo slots total:
+
+  SLOT          WHERE ON THE PAGE             IDEAL SIZE
+  ─────────     ────────────────────────────  ──────────────
+  hero-1        Hero: left polaroid           240 × 240 px
+  hero-2        Hero: center polaroid         240 × 240 px
+  hero-3        Hero: right polaroid          240 × 240 px
+  card-1        Events: first card            4:5 portrait
+  card-2        Events: second card           4:5 portrait
+  card-3        Events: third card            4:5 portrait
+  feature-1     Feature section (big cover)   3:4 portrait
+
+Step 3 — Find the slot in the HTML. Each one looks like this:
+
+     <div class="photo-slot" data-slot="hero-1">
+       <span class="ph-label">240 × 240 px</span>
+       <input type="file" accept="image/*" ...>
+     </div>
+
+  Replace that ENTIRE block with a single <img> tag:
+
+     <img src="photos/your-file.jpg"
+          alt="Short description of the photo"
+          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+
+  Example — replacing hero-1 (left polaroid):
+  BEFORE:
+     <div class="photo-slot" data-slot="hero-1">
+       <span class="ph-label">240 × 240 px</span>
+       <input type="file" accept="image/*" aria-label="Upload photo for polaroid 1">
+     </div>
+
+  AFTER:
+     <img src="photos/my-photo.jpg"
+          alt="Event night photo"
+          style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+
+Note: the photos/ folder already exists in the repo. Just drop
+your images in there and push them along with index.html:
+  git add photos/
+  git add index.html
+  git commit -m "add photos"
+  git push
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ HOW TO ADD YOUR LINKTREE LINK
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Best place: the footer, next to Privacy / Contact / etc.
+
+In the HTML, find this block (near the bottom, inside <footer>):
+
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">Contact</a>
+    <a href="#">Submissions</a>
+    <a href="#">About</a>
+  </div>
+
+Add your Linktree link by inserting a new <a> tag:
+
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">Contact</a>
+    <a href="#">Submissions</a>
+    <a href="#">About</a>
+    <a href="https://linktr.ee/YOUR_USERNAME" target="_blank">Linktree</a>
+  </div>
+
+Replace YOUR_USERNAME with your actual Linktree handle.
+The target="_blank" makes it open in a new tab.
+
+Alternative: add it to the nav bar Subscribe area — search for
+<button class="pill">Subscribe</button> and add a link before it.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ CONTACT SECTION — YOU ONLY NEED ONE EMAIL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+The site currently has 4 contact cards (General, Press, Bookings,
+Partnerships) each with a different email address. Since you only
+have one email, showing 4 cards is redundant and confusing.
+
+RECOMMENDED: Replace all 4 cards with a single card.
+
+In the HTML, find <section class="inquiries" and inside it
+find the <div class="inq-grid"> block. Delete all 4 inq-card
+divs and replace them with just one:
+
+  <div class="inq-grid" style="grid-template-columns: 1fr; max-width: 420px;">
+    <div class="inq-card">
+      <span class="inq-type">Contact</span>
+      <h4>Get in touch</h4>
+      <p>For bookings, press, general questions, or anything else — reach out directly.</p>
+      <a class="inq-email" href="mailto:YOUR@EMAIL.COM">YOUR@EMAIL.COM</a>
+    </div>
+  </div>
+
+Replace YOUR@EMAIL.COM with your actual email address (in both
+the href="mailto:..." and the visible link text).
+
+Also change .inq-grid in the CSS (around line 781) from:
+  grid-template-columns: repeat(4, 1fr);
+to:
+  grid-template-columns: 1fr;
+(or just use the inline style shown above to override it)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ OTHER QUICK EDITS (search for "EDIT:" in index.html)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Site name (top-left of nav): search "brand-name"
+- Browser tab title:           search "<title>"
+- Hero headline:               search "hero-title"
+- Hero body copy:              search "hero-sub"
+- Polaroid captions:           search "pol-1-caption", "pol-2-caption", "pol-3-caption"
+- Event card titles/text:      search "card-1-title", "card-2-title", "card-3-title"
+- Feature section copy:        search "feature-body"
+- Accent color (the pink):     search "--pink:" in the <style> block
+- Issue label (dashed box):    search 'content: "VOL.04'
